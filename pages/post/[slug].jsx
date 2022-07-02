@@ -1,27 +1,32 @@
 import React from 'react'
-
+import { useRouter } from 'next/router';
 import { getPosts, getPostDetails } from '../../services'
-import { Details, Categories, Widget, Author, Comments, CommentsForm } from '../../components'
+import { Details, Categories, Widget, Author, Comments, CommentsForm, Loader } from '../../components'
 
 const PostDetails = ({ post }) => {
-  return (
-    <div className='container mx-auto px-10 mb-8'>
-      <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
-        <div className='col-span-1 lg:col-span-8'>
-          <Details post={post}></Details>
-          <Author author={post.author}></Author>
-          <CommentsForm slug={post.slug}></CommentsForm>
-          <Comments slug={post.slug}></Comments>
-        </div>
-        <div className='col-span-1 lg:col-span-4'>
-          <div className='relative lg:sticky top-8'>
-            <Widget slug={post.slug} categories={post.categories.map((category) => category.slug)}></Widget>
-            <Categories></Categories>
+  const router = useRouter();
+  if (router.isFallback) {
+    return <Loader />;
+  }
+  else
+    return (
+      <div className='container mx-auto px-10 mb-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
+          <div className='col-span-1 lg:col-span-8'>
+            <Details post={post}></Details>
+            <Author author={post.author}></Author>
+            <CommentsForm slug={post.slug}></CommentsForm>
+            <Comments slug={post.slug}></Comments>
+          </div>
+          <div className='col-span-1 lg:col-span-4'>
+            <div className='relative lg:sticky top-8'>
+              <Widget slug={post.slug} categories={post.categories.map((category) => category.slug)}></Widget>
+              <Categories></Categories>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
 }
 
 export default PostDetails

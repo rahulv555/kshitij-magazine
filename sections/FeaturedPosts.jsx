@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-import { FeaturedPostCard } from '../components';
+import { FeaturedPost } from '../components';
 import { getFeaturedPosts } from '../services';
 
 const responsive = {
@@ -50,12 +50,12 @@ export const FeaturedPosts = () => {
       </svg>
     </div>
   );
-
+    console.log(featuredPosts);
   return (
     <div className="mb-8">
       <Carousel infinite customLeftArrow={customLeftArrow} customRightArrow={customRightArrow} responsive={responsive} itemClass="px-4">
         {dataLoaded && featuredPosts.map((post, index) => (
-          <FeaturedPostCard key={index} post={post} />
+          <FeaturedPost key={index} post={post} />
         ))}
       </Carousel>
     </div>

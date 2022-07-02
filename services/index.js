@@ -132,26 +132,25 @@ export const getCategories = async () => {
   return results.categories;
 };
 
-
 export const getFeaturedPosts = async () => {
   const query = gql`
-    query GetCategoryPost {
-      posts(where: {featuredPost: true}){
-        author{
+    query GetFeaturedPost {
+      posts(where: { featuredPost: true }) {
+        author {
           name
-          photo{
+          photo {
             url
           }
         }
-        featuredImage{
+        featuredImage {
           url
         }
         title
         slug
-        createdAt
+        createdAt 
       }
     }
   `;
   const results = await request(graphqlAPI, query);
-  return results.categories;
+  return results.posts;
 };
