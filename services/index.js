@@ -50,6 +50,7 @@ export const getPostDetails = async (slug) => {
           id
           photo {
             id
+            url
           }
         }
         createdAt
@@ -124,6 +125,30 @@ export const getCategories = async () => {
       categories {
         name
         slug
+      }
+    }
+  `;
+  const results = await request(graphqlAPI, query);
+  return results.categories;
+};
+
+
+export const getFeaturedPosts = async () => {
+  const query = gql`
+    query GetCategoryPost {
+      posts(where: {featuredPost: true}){
+        author{
+          name
+          photo{
+            url
+          }
+        }
+        featuredImage{
+          url
+        }
+        title
+        slug
+        createdAt
       }
     }
   `;

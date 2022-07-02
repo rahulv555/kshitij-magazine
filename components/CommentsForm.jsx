@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
-const CommentsForm = () => {
+const CommentsForm = ({}) => {
+
+
   return (
-    <div>Comments Form</div>
+    <div>
+
+    </div>
   )
 }
 
